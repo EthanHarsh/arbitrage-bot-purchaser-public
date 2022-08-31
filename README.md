@@ -1,7 +1,7 @@
 # arbitrage-bot-purchaser-public
 _Arbitrage Bot Purchasing Microservice_
 
-![Typescript.js Badge](https://img.shields.io/badge/JavaScript-Typescript-green) ![Vue Badge](https://img.shields.io/badge/Framework-VUE-green)
+![Typescript.js Badge](https://img.shields.io/badge/JavaScript-Typescript-green) ![Ethers Badge](https://img.shields.io/badge/Web3-Ethers.js-red)
 
 ## Description
 
