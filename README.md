@@ -5,7 +5,7 @@ _Arbitrage Bot Purchasing Microservice_
 
 ## Description
 
-This is a token purchasing microservice for the DeFi arbitrage bot. This service uses Typescript, Express.js, Node.js, Mongoose, Uniswap SDK, and Ethers.js, all of which are Javascript frameworks. When purchasing tokens, an order request is received, the request is checked for purchasing requirements,and the purchase is routed and executed if the requirements are fulfilled.
+This is a token purchasing microservice for the DeFi arbitrage bot. This service uses Typescript, Express.js, Mongoose, Uniswap SDK, and Ethers.js, all of which are Javascript frameworks. When purchasing tokens, an order request is received, the request is checked for purchasing requirements,and the purchase is routed and executed if the requirements are fulfilled.
 
 ## Quick Start
 
