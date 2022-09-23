@@ -1,9 +1,8 @@
 import {Contract, utils, Wallet} from 'ethers';
-import {TokenAmount, Route, Pair} from '@uniswap/sdk';
 import axios from 'axios';
 
 import {saveTx} from '../database';
-import {findToken} from './utils';
+import {findToken, getPair} from './utils';
 
 import {WFTM, usdc} from './static/tokens';
 
@@ -148,57 +147,10 @@ export default async function spookyStables(orderObj) {
     await saveTx(txData);
   }
 }
-/*
-function findToken(token) {
-  let tokenObj;
-  switch (token) {
-    case 'WFTM':
-      tokenObj = WFTM;
-      break;
-    case 'USDC':
-      tokenObj = {token: USDC, contract: usdcFtmLpContract};
-      break;
-    case 'DAI':
-      tokenObj = {token: DAI, contract: daiFtmLpContract};
-      break;
-    case 'FUSDT':
-      tokenObj = {token: FUSDT, contract: fusdtFtmLpContract};
-      break;
-    case 'MIM':
-      tokenObj = {token: MIM, contract: mimFtmLpContract};
-      break;
-    default:
-      tokenObj = 'none';
-  }
-
-  return tokenObj;
-} */
 
 function getTokenContract(token) {
   const contract = new Contract(token.address, ERC20ABI, PROVIDER);
   return contract;
-}
-
-async function getPair(contract, lpName, token0, token1, outToken, stableName) {
-  const reserves = await contract.getReserves();
-  const pair = new Pair(
-      new TokenAmount(token0, reserves[0]),
-      new TokenAmount(token1, reserves[1]),
-  );
-  const route = new Route([pair], outToken);
-  const ftmPrice = route.midPrice.toSignificant(6);
-  const stablePrice = route.midPrice.invert().toSignificant(6);
-  console.log(`${lpName} => Buy price: ${ftmPrice}`);
-  console.log(`${lpName} => Sell price: ${stablePrice}`);
-
-  return {
-    ftmPrice,
-    stablePrice,
-    stableName,
-    pair,
-    route,
-    reserves,
-  };
 }
 
 async function tradeSupervisor(
