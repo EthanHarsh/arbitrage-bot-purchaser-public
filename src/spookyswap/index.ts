@@ -2,15 +2,11 @@ import {Contract, utils, Wallet} from 'ethers';
 import {TokenAmount, Route, Pair} from '@uniswap/sdk';
 import axios from 'axios';
 
-import saveTx from '../../../utils/saveTx';
+import {saveTx} from '../database';
+import {findToken} from './utils';
 
-import {WFTM, USDC, DAI, FUSDT, MIM, usdc} from './static/tokens';
-import {
-  usdcFtmLpContract,
-  daiFtmLpContract,
-  fusdtFtmLpContract,
-  mimFtmLpContract,
-} from './static/lpContracts';
+import {WFTM, usdc} from './static/tokens';
+
 import {ERC20ABI, ROUTER} from './static/contractAbis';
 
 import PROVIDER from './static/provider';
@@ -152,7 +148,7 @@ export default async function spookyStables(orderObj) {
     await saveTx(txData);
   }
 }
-
+/*
 function findToken(token) {
   let tokenObj;
   switch (token) {
@@ -176,7 +172,7 @@ function findToken(token) {
   }
 
   return tokenObj;
-}
+} */
 
 function getTokenContract(token) {
   const contract = new Contract(token.address, ERC20ABI, PROVIDER);
