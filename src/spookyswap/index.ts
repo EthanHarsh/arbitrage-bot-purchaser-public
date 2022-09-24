@@ -1,11 +1,12 @@
 import {Contract, utils, Wallet} from 'ethers';
 
 import {saveTx} from '../database';
-import {findToken, getPair} from './utils';
+import {findToken, getPair, getTokenContract} from './utils';
 
 import {WFTM, usdc} from './static/tokens';
 
-import {ERC20ABI, ROUTER} from './static/contractAbis';
+import {ROUTER} from './static/contractAbis';
+import {tradeSupervisor} from '../modules';
 
 import PROVIDER from './static/provider';
 
@@ -145,39 +146,6 @@ export default async function spookyStables(orderObj) {
     };
     await saveTx(txData);
   }
-}
-
-function getTokenContract(token) {
-  const contract = new Contract(token.address, ERC20ABI, PROVIDER);
-  return contract;
-}
-
-async function balanceArr(orderObj, wallet) {
-  // FUSDT
-  const fusdtToken = findToken('FUSDT');
-  const fusdtContract = await getTokenContract(fusdtToken.token);
-  const fusdtBalance = await fusdtContract.balanceOf(wallet.address);
-  const tokenBalanceArr = [{token: 'FUSDT', balance: fusdtBalance}];
-
-  // USDC
-  const usdcToken = findToken('USDC');
-  const usdcContract = await getTokenContract(usdcToken.token);
-  const usdcBalance = await usdcContract.balanceOf(wallet.address);
-  tokenBalanceArr.push({token: 'USDC', balance: usdcBalance});
-
-  // DAI
-  const daiToken = findToken('DAI');
-  const daiContract = await getTokenContract(daiToken.token);
-  const daiBalance = await daiContract.balanceOf(wallet.address);
-  tokenBalanceArr.push({token: 'DAI', balance: daiBalance});
-
-  // MIM
-  const mimToken = findToken('MIM');
-  const mimContract = await getTokenContract(mimToken.token);
-  const mimBalance = await mimContract.balanceOf(wallet.address);
-  tokenBalanceArr.push({token: 'MIM', balance: mimBalance});
-
-  return tokenBalanceArr;
 }
 
 async function makeTrade(
