@@ -1,5 +1,4 @@
 import {Contract, utils, Wallet} from 'ethers';
-import axios from 'axios';
 
 import {saveTx} from '../database';
 import {findToken, getPair} from './utils';
@@ -151,34 +150,6 @@ export default async function spookyStables(orderObj) {
 function getTokenContract(token) {
   const contract = new Contract(token.address, ERC20ABI, PROVIDER);
   return contract;
-}
-
-async function tradeSupervisor(
-    orderObj,
-    wallet,
-    decimals,
-    sellPrice,
-    buyPrice,
-    orderFlag,
-    orderTradeAmount,
-) {
-  const tokenBalanceArr = await balanceArr(orderObj, wallet);
-  const data = await axios
-      .post('http://127.0.0.1:9999', {
-        tokenBalanceArr,
-        buy: orderObj.buy,
-        sell: orderObj.sell,
-        sellPrice,
-        buyPrice,
-        orderFlag,
-        orderTradeAmount,
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  // @ts-ignore
-  const {sellAmount, buyAmount, flag, sellAmountWei, buyAmountWei} = data.data;
-  return {sellAmount, buyAmount, flag, sellAmountWei, buyAmountWei};
 }
 
 async function balanceArr(orderObj, wallet) {
