@@ -31,7 +31,7 @@ npm run start
 ```
 ## Development
 ### Dev Container
-Activate Development container using your prefered IDE.
+Activate Development container using your preferred IDE.
 ### Using NPM - Development Start
 #### Start for Development - _Nodemon_
 ```
