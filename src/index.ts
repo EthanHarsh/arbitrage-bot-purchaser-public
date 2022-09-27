@@ -2,7 +2,7 @@
 /* eslint-disable require-jsdoc */
 import express from 'express';
 import 'dotenv/config';
-import spookyStables from './spookyswap';
+import spookyStables from './spookyswap/stables';
 import mongoose from 'mongoose';
 
 

@@ -1,13 +1,13 @@
 import {Wallet} from 'ethers';
 
-import {saveTx} from '../database';
-import {findToken, getPair, getTokenContract} from './utils';
+import {saveTx} from '../../database';
+import {findToken, getPair, getTokenContract} from '../utils';
 
-import {WFTM} from './static/tokens';
+import {WFTM} from '../static/tokens';
 
-import {tradeSupervisor, makeTrade} from '../modules';
+import {tradeSupervisor, makeTrade} from '../../modules';
 
-import PROVIDER from './static/provider';
+import PROVIDER from '../static/provider';
 
 export default async function spookyStables(orderObj) {
   const wallet = new Wallet(process.env.FANTOM_PRIVATE_KEY, PROVIDER);
