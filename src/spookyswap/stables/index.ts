@@ -16,7 +16,9 @@ export default async function spookyStables(orderObj) {
   const buy = findToken(orderObj.buy);
   const sellContract = getTokenContract(sell.token);
   const buyContract = getTokenContract(buy.token);
+  // Add error handling
   const sellDecimals = await sellContract.decimals();
+  // Add error handling
   const buyDecimals = await buyContract.decimals();
 
 
@@ -26,6 +28,7 @@ export default async function spookyStables(orderObj) {
     stable: '',
   };
   if (orderObj.sell === 'DAI' || orderObj.sell === 'MIM') {
+    // Add error handling
     sellPair = await getPair(
         sell.contract,
         `${orderObj.sell}-WFTM LP`,
@@ -37,6 +40,7 @@ export default async function spookyStables(orderObj) {
     sellRoute.ftm = sellPair.route.path[0].address;
     sellRoute.stable = sellPair.route.path[1].address;
   } else {
+    // Add error handling
     sellPair = await getPair(
         sell.contract,
         `${orderObj.sell}-WFTM LP`,
@@ -55,6 +59,7 @@ export default async function spookyStables(orderObj) {
     stable: '',
   };
   if (orderObj.buy === 'DAI' || orderObj.buy === 'MIM') {
+    // Add error handling
     buyPair = await getPair(
         buy.contract,
         `${orderObj.buy}-WFTM LP`,
@@ -66,6 +71,7 @@ export default async function spookyStables(orderObj) {
     buyRoute.ftm = buyPair.route.path[1].address;
     buyRoute.stable = buyPair.route.path[0].address;
   } else {
+    // Add error handling
     buyPair = await getPair(
         buy.contract,
         `${orderObj.buy}-WFTM LP`,
@@ -85,6 +91,7 @@ export default async function spookyStables(orderObj) {
     parseFloat(buyPair.ftmPrice) * parseFloat(buyPair.stablePrice);
   const orderFlag = orderObj.flag;
   const orderTradeAmount = orderObj.tradeAmount;
+  // Add error handling
   const amountObj = await tradeSupervisor(
       orderObj,
       wallet,
@@ -108,6 +115,7 @@ export default async function spookyStables(orderObj) {
   console.log(`Flag => ${flag}`);
 
   if (flag === true) {
+    // Add error handling
     const finishedTx = await makeTrade(
         sellRoute,
         buyRoute,
@@ -143,6 +151,7 @@ export default async function spookyStables(orderObj) {
       exchange: 'Spookyswap',
       finishedTx,
     };
+    // Add error handling
     await saveTx(txData);
   }
 }

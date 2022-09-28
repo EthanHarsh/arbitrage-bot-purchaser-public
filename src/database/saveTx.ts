@@ -20,6 +20,7 @@ const TxModel = mongoose.model('executed-transaction', transactionSchema);
 
 export default async function saveTx(tx) {
   const transaction = new TxModel(tx);
+  // Add error handling
   const savedTx = await transaction.save();
   return savedTx;
 };

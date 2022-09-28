@@ -15,6 +15,7 @@ app.post('/', async function(req, res) {
 
   console.log(`Request receieved with body: ${JSON.stringify(body)}`);
   console.log(`Starting purchase of ${body.buy} for ${body.sell}`);
+  // Add error handling
   const purchaseResult = await spookyStables(body);
 
   res.status(204).json(purchaseResult);

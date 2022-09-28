@@ -1,6 +1,7 @@
 
 import {TokenAmount, Route, Pair} from '@uniswap/sdk';
 export default async function getPair(contract, lpName, token0, token1, outToken, stableName) {
+  // Add error handling
   const reserves = await contract.getReserves();
   const pair = new Pair(
       new TokenAmount(token0, reserves[0]),

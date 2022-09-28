@@ -45,8 +45,9 @@ export default async function makeTrade(
     ];
   }
   console.log(`Path: ${pathArr}`);
+  // Add error handling
   const feeData = await PROVIDER.getFeeData();
-
+  // Add error handling
   const tx = await spookyRouter.swapExactTokensForTokens(
       sellAmountWei,
       buyAmountWei,
@@ -55,7 +56,7 @@ export default async function makeTrade(
       Math.floor(Date.now() / 1000) + 60 * 20,
       feeData,
   );
-
+  // Add error handling
   const finishedTx = await tx.wait()
       .catch((err) => {
         console.error(err);
