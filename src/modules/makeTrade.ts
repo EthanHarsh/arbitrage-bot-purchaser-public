@@ -63,5 +63,4 @@ export default async function makeTrade(
         return false;
       });
   return finishedTx;
-}
-;
+};
